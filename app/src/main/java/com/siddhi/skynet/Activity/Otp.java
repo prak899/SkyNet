@@ -45,7 +45,6 @@ public class Otp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         otpView = findViewById(R.id.otp_view);
         progressBar= findViewById(R.id.progressBar);
@@ -150,7 +149,7 @@ public class Otp extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
-                            Intent intent = new Intent(Otp.this, Dashboard.class);
+                            Intent intent = new Intent(Otp.this, ProfileSetup.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 
@@ -178,6 +177,5 @@ public class Otp extends AppCompatActivity {
 
                     }
                 });
-
     }
 }

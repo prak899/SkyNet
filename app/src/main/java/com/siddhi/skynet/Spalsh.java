@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.siddhi.skynet.Activity.Dashboard;
 import com.siddhi.skynet.Activity.ServiceBook;
 import com.siddhi.skynet.Activity.SignIn;
 import com.siddhi.skynet.Admin.ServiceEntry;
@@ -95,7 +92,7 @@ public class Spalsh extends AppCompatActivity {
 
     public void Load(){
         if (firebaseAuth.getCurrentUser() != null) {
-            startActivity(new Intent(Spalsh.this, Dashboard.class));
+            startActivity(new Intent(Spalsh.this, ServiceBook.class));
             Spalsh.this.finish();
         } else if (bool){
             startActivity(new Intent(Spalsh.this, ServiceEntry.class));

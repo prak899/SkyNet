@@ -4,24 +4,25 @@
     package="com.siddhi.skynet">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
     <application
         android:allowBackup="true"
-        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".Activity.CostomActivity"/>
+        <activity android:name=".Admin.ServiceOrder"/>
+        <activity android:name=".Admin.Entry" />
+        <activity android:name=".Activity.CostomActivity" />
         <activity android:name=".Admin.ServiceEntry" />
         <activity android:name=".Activity.ProfileSetup" />
         <activity android:name=".Activity.ServiceBook" />
         <activity android:name=".Spalsh" />
         <activity android:name=".Activity.Otp" />
         <activity android:name=".Activity.Login" />
-        <activity android:name=".Activity.Dashboard" />
         <activity android:name=".Activity.SignIn" />
         <activity android:name=".Activity.IntroActivity">
             <intent-filter>

@@ -27,4 +27,6 @@
 
     <color name="grey">#E9EAEE</color>
     <color name="yellow">#F8BA0F</color>
+    <color name="colorLightGrey">#cfcfcf</color>
+
 </resources>
