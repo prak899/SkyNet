@@ -28,4 +28,8 @@
     <string name="register">Register</string>
     <string name="re_type_password">Re-type Password</string>
     <string name="your_name">Full Name</string>
+    <string name="vpa">8847845697pp@paytm</string>
+    <string name="payee">Prakash Majhi</string>
+    <string name="transaction_description">For Order</string>
+    <string name="amount">1.0</string>
 </resources>

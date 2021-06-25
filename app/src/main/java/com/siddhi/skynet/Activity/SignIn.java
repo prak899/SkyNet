@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.mikepenz.iconics.context.IconicsLayoutInflater2;
@@ -21,6 +22,7 @@ import com.siddhi.skynet.R;
 public class SignIn extends AppCompatActivity {
     TextInputEditText User_Number;
     View shine;
+    TextView Admin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory2(getLayoutInflater(), new IconicsLayoutInflater2(getDelegate()));
@@ -44,12 +46,18 @@ public class SignIn extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+
+        Admin.setOnClickListener(v->{
+            startActivity(new Intent(this, Login.class));
+        });
     }
 
     private void init() {
         User_Number= findViewById(R.id.number);
 
         shine = findViewById(R.id.shine);
+
+        Admin= findViewById(R.id.admin);
         shineAnimation();
     }
 

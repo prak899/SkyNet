@@ -1,27 +1,34 @@
 package com.siddhi.skynet.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.nandroidex.upipayments.listener.PaymentStatusListener;
+import com.nandroidex.upipayments.models.TransactionDetails;
+import com.nandroidex.upipayments.utils.UPIPayment;
 import com.siddhi.skynet.Class.OrderSheet;
 import com.siddhi.skynet.Model.OrderModel;
 import com.siddhi.skynet.R;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class CostomActivity extends AppCompatActivity {
+public class CostomActivity extends AppCompatActivity implements PaymentStatusListener {
 
     private TextView ServiceName, ServicePrice;
     private ImageView profileBack;
@@ -29,14 +36,16 @@ public class CostomActivity extends AppCompatActivity {
     private Boolean profileSet = false;
 
     private FirebaseFirestore db;
-    String productId, productName, productPrice, productDetails, productImage, productRating;
+    String productId, productPrice;
 
 
     String OrderId, coustomerNumber, orderDateTime;
 
-    String storeType="Grocery", storeName="Prakash general store", status="Order";
+    String status="Order";
 
     String discount="20%", coustomerAddress="Bilaspur, C.G", estimatedTime="within 1day";
+
+    private UPIPayment upiPayment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +86,7 @@ public class CostomActivity extends AppCompatActivity {
 
             @Override
             public void onDialogCameraClick() {
-                Toast.makeText(CostomActivity.this, "Order Success", Toast.LENGTH_SHORT).show();
+                CostomActivity.this.startUpiPayment();
             }
 
             @Override
@@ -111,28 +120,103 @@ public class CostomActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            dbProducts1.add(profile)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(CostomActivity.this, "Product Added", Toast.LENGTH_LONG).show();
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(CostomActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        }
-                                    });
+                            Toast.makeText(CostomActivity.this, "Product Added", Toast.LENGTH_LONG).show();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(CostomActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.d("Errrdsfgdj", "onFailure: "+e);
                         }
                     });
 
         }
     }
+
+
+    private void startUpiPayment() {
+        long millis = System.currentTimeMillis();
+        upiPayment = new UPIPayment.Builder()
+                .with(CostomActivity.this)
+                .setPayeeVpa(getString(R.string.vpa))
+                .setPayeeName(getString(R.string.payee))
+                .setTransactionId(Long.toString(millis))
+                .setTransactionRefId(Long.toString(millis))
+                .setDescription(getString(R.string.transaction_description))
+                .setAmount(getString(R.string.amount))
+                .build();
+
+        upiPayment.setPaymentStatusListener(this);
+
+        if (upiPayment.isDefaultAppExist()) {
+            onAppNotFound();
+            return;
+        }
+
+        upiPayment.startPayment();
+    }
+
+    @Override
+    public void onTransactionCompleted(@Nullable TransactionDetails transactionDetails) {
+        String status = null;
+        String approvalRefNo = null;
+        if (transactionDetails != null) {
+            status = transactionDetails.getStatus();
+            approvalRefNo = transactionDetails.getApprovalRefNo();
+        }
+        boolean success = false;
+        if (status != null) {
+            success = status.equalsIgnoreCase("success") || status.equalsIgnoreCase("submitted");
+            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        }
+        /*int dialogType = success ? DialogTypes.TYPE_SUCCESS : DialogTypes.TYPE_ERROR;
+        String title = success ? "Good job!" : "Oops!";
+        String description = success ? ("UPI ID :" + approvalRefNo) : "Transaction Failed/Cancelled";
+        int buttonColor = success ? Color.parseColor("#00C885") : Color.parseColor("#FB2C56");
+        LottieAlertDialog alertDialog = new LottieAlertDialog.Builder(this, dialogType)
+                .setTitle(title)
+                .setDescription(description)
+                .setNoneText("Okay")
+                .setNoneTextColor(Color.WHITE)
+                .setNoneButtonColor(buttonColor)
+                .setNoneListener(new ClickListener() {
+                    @Override
+                    public void onClick(@NotNull LottieAlertDialog lottieAlertDialog) {
+                        lottieAlertDialog.dismiss();
+                    }
+                })
+                .build();
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+        upiPayment.detachListener();*/
+
+    }
+
+    @Override
+    public void onAppNotFound() {
+        Toast.makeText(this, "App Not Found", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTransactionCancelled() {
+        Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTransactionFailed() {
+        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTransactionSubmitted() {
+        Toast.makeText(this, "Pending | Submitted", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTransactionSuccess() {
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+    }
+
 }
