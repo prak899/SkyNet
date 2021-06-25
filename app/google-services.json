@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "489680081400",
+    "project_id": "skynet-b0d35",
+    "firebase_url": "https://skynet-b0d35-default-rtdb.firebaseio.com/",
+    "storage_bucket": "skynet-b0d35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489680081400:android:759b4c2f57e2bc2115060d",
+        "android_client_info": {
+          "package_name": "com.siddhi.skynet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489680081400-mm4bcp169h7ohhjitgoqm2fvmoav6t9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.siddhi.skynet",
+            "certificate_hash": "55a8ebd0da9f1eb761cca1065e5a5dc8f93e7aa4"
+          }
+        },
+        {
+          "client_id": "489680081400-313ml9v29n83708i4pocpudbd9f6o913.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi3wbphqmKxrdX_pswdE58YA5gsmwF0iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489680081400-313ml9v29n83708i4pocpudbd9f6o913.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

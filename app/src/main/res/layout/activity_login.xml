@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle">
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/containerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_margin="@dimen/container_layout_margin">
+
+        <TextView
+            android:id="@+id/signup_title"
+            style="@style/LabelStyle"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/sf_pro_display_medium"
+            android:text="@string/signup_title"
+            android:textColor="@color/orange" />
+
+        <TextView
+            android:id="@+id/signup_welcome_msg"
+            style="@style/LabelStyle"
+            android:layout_below="@id/signup_title"
+            android:layout_marginTop="16dp"
+            android:text="@string/signup_welcome_txt" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="16dp"
+            style="@style/EditTextStyle"
+            android:hint="Enter number"
+            android:layout_below="@id/signup_welcome_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/number"
+                android:maxLength="10"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <RelativeLayout
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <LinearLayout
+                android:onClick="signup"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_circular"
+                android:gravity="center"
+                android:weightSum="10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Create"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_next" />
+
+            </LinearLayout>
+            <View
+                android:id="@+id/shine"
+                android:layout_width="30dp"
+                android:layout_height="85dp"
+                android:background="@drawable/bg_shine"
+                android:rotation="20" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
