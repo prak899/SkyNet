@@ -21,7 +21,7 @@
         android:id="@+id/tv_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tag"
+        android:text="@string/tagAdmin"
         android:textSize="17sp"
         android:fontFamily="@font/proximanovaregular"
         android:layout_marginStart="25dp"
@@ -32,7 +32,7 @@
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/e_mail"
+        android:hint="@string/e_userid"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:padding="15dp"
@@ -46,7 +46,7 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/password"
+        android:hint="@string/e_password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -55,7 +55,8 @@
         android:inputType="textPassword"
         android:layout_centerInParent="true"
         android:background="@drawable/et_custom"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:password="true"/>
 
     <Button
         android:onClick="onClickBtn"

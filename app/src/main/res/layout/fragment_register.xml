@@ -38,7 +38,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:padding="15dp"
-        android:inputType="textPersonName"
+        android:inputType="textCapCharacters"
         android:fontFamily="@font/proximanovaregular"
         android:background="@drawable/et_custom"
         android:textSize="15sp" />
@@ -67,11 +67,12 @@
         android:layout_marginBottom="10dp"
         android:padding="15dp"
         android:fontFamily="@font/proximanovaregular"
-        android:inputType="text"
+        android:inputType="textCapCharacters"
         android:background="@drawable/et_custom"
         android:textSize="15sp" />
 
     <EditText
+        android:maxLength="10"
         android:id="@+id/et_number"
         android:layout_width="match_parent"
         android:layout_height="50dp"

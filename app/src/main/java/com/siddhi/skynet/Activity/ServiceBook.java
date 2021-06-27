@@ -25,6 +25,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -53,14 +54,11 @@ public class ServiceBook extends AppCompatActivity {
     RecyclerView.Adapter adapter;
 
     TextView EmptyView, HeaderName;
-
-    String number;
     ProgressBar progressBar;
 
-    ArrayList<String> arrayListUser=new ArrayList<>();
-    String arrayData="",time="";
-    //CheckBox checkBox;
+
     FloatingActionButton fab;
+    ImageView cartOption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +85,9 @@ public class ServiceBook extends AppCompatActivity {
         EmptyView = (TextView) findViewById(R.id.empty_view);
 
         HeaderName= findViewById(R.id.header_name);
-        //checkBox= findViewById(R.id.checkservice);
 
         fab= findViewById(R.id.fab);
+        cartOption= findViewById(R.id.cartOption);
     }
     public void seoM(){
 

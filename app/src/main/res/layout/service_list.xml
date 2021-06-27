@@ -11,7 +11,8 @@
     android:layout_marginRight="5dp"
     android:layout_marginLeft="5dp"
     card_view:cardCornerRadius="5dp"
-    app:ignore="NamespaceTypo">
+    app:ignore="NamespaceTypo"
+    android:paddingBottom="5dp">
 
     <LinearLayout
         android:id="@+id/rlInner"
@@ -22,9 +23,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/gallery_img_view"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/white_circular_bg"
+                android:foregroundGravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:id="@+id/tvContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,14 +69,23 @@
                 android:textColor="#000000"
                 />
         </LinearLayout>
+
         <CheckBox
+            android:visibility="gone"
             android:id="@+id/chbContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_marginRight="10dp" />
 
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/serviceCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginRight="10dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_cart_black" />
     </LinearLayout>
 
 

@@ -11,8 +11,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.siddhi.skynet.Activity.Login;
+import com.siddhi.skynet.Admin.Details;
 import com.siddhi.skynet.Admin.Entry;
 import com.siddhi.skynet.Admin.ServiceEntry;
+import com.siddhi.skynet.Admin.ServiceOrder;
 import com.siddhi.skynet.AdminModel.Survey;
 import com.siddhi.skynet.R;
 
@@ -68,25 +71,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
             itemView.setOnClickListener(view1 -> {
                 int itemPosition = getLayoutPosition();
-                final Intent intent;
+                Intent intent = null;
                 switch (itemPosition){
                     case 0:
                         intent =  new Intent(context, Entry.class);
                         break;
                     case 1:
-                        intent =  new Intent(context, ServiceEntry.class);
+                        intent =  new Intent(context, ServiceOrder.class);
                         break;
                     case 2:
-                        intent =  new Intent(context, ServiceEntry.class);
+                        intent =  new Intent(context, Details.class);
                         break;
                     case 3:
-                        intent =  new Intent(context, ServiceEntry.class);
-                        break;
-                    case 4:
-                        intent =  new Intent(context, ServiceEntry.class);
-                        break;
-                    case 5:
-                        intent =  new Intent(context, ServiceEntry.class);
+                        //intent =  new Intent(context, ServiceEntry.class);
                         break;
                     default:
                         intent =  new Intent(context, ServiceEntry.class);

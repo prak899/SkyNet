@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/statuslay"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Status">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/sampleToolBar"
+            android:layout_width="match_parent"
+            android:background="@color/bottom_top"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topNavigationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:visibility="invisible"
+
+                    android:id="@+id/exitFormImageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/app_name"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_left"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/app_name"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginRight="16dp" />
+
+                <TextView
+                    android:fontFamily="@font/proximanovaregular"
+                    android:gravity="center_horizontal"
+                    android:text="@string/app_name"
+                    android:id="@+id/pageTitleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/backButton"
+                    app:layout_constraintEnd_toStartOf="@+id/addAdmin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="16dp" />
+
+                <ImageButton
+                    android:onClick="showAlertDialogButtonClicked"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_add"
+                    android:id="@+id/addAdmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="finish"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginRight="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/sampleToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_view"/>
+
+    </RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -2,6 +2,7 @@ package com.siddhi.skynet.Model;
 
 public class MasterModel {
     String serviceName, servicePrice, checkService;
+    String serviceType, image;
 
     public MasterModel() {
     }
@@ -28,5 +29,21 @@ public class MasterModel {
 
     public void setCheckService(String checkService) {
         this.checkService = checkService;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -11,16 +11,17 @@ public class ServiceEntryModel {
     String id;
     boolean isImportant;
     String serviceType;
+    String image;
 
 
-    public ServiceEntryModel(String serviceName, String servicePrice, String id, boolean isImportant, String serviceType) {
+    public ServiceEntryModel(String serviceName, String servicePrice, String id, boolean isImportant, String serviceType, String image) {
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
         this.id = id;
         this.isImportant = isImportant;
         this.serviceType = serviceType;
+        this.image = image;
     }
-
 
     public String getServiceName() {
         return serviceName;
@@ -60,5 +61,13 @@ public class ServiceEntryModel {
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

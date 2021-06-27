@@ -91,13 +91,13 @@ public class Spalsh extends AppCompatActivity {
 
 
     public void Load(){
-        if (firebaseAuth.getCurrentUser() != null) {
-            startActivity(new Intent(Spalsh.this, ServiceBook.class));
+        /*if (firebaseAuth.getCurrentUser() != null) {
+            startActivity(new Intent(Spalsh.this, SignIn.class));
             Spalsh.this.finish();
-        } else if (bool){
+        } else*/ if (bool){
             startActivity(new Intent(Spalsh.this, ServiceEntry.class));
         } else {
-            startActivity(new Intent(Spalsh.this, SignIn.class));
+            startActivity(new Intent(Spalsh.this, ServiceBook.class));
         }
     }
 

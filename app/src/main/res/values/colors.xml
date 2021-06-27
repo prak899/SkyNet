@@ -29,4 +29,16 @@
     <color name="yellow">#F8BA0F</color>
     <color name="colorLightGrey">#cfcfcf</color>
 
+    <color name="goodgrey">#535353</color>
+
+    <color name="statusBack">#293859</color>
+    <color name="statusCompleted">#1e7f22</color>
+    <color name="statusPending">#940202</color>
+    <color name="statusAssigned">#ffffff</color>
+    <color name="statusUnderText">#908b89</color>
+    <color name="white">#fff</color>
+
+
+    <color name="blue">#293859</color>
+    <color name="lightgrey">#EEEEEE</color>
 </resources>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Dashboard">
+    tools:context=".Admin.Entry">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -116,6 +116,7 @@
             tools:ignore="RtlSymmetry"
             tools:targetApi="lollipop" />
         <TextView
+            android:visibility="gone"
             android:gravity="center_horizontal"
             android:id="@+id/note"
             android:layout_below="@id/spinner"
@@ -140,6 +141,24 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_below="@+id/linear"
+            android:id="@+id/gallery_img_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/white_circular_bg"
+            android:src="@android:drawable/ic_menu_add"
+            android:foregroundGravity="center"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_below="@+id/gallery_img_view"
+            android:id="@+id/imgView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_alignParentEnd="true"

@@ -1,10 +1,14 @@
 package com.siddhi.skynet.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -22,53 +29,124 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.nandroidex.upipayments.listener.PaymentStatusListener;
 import com.nandroidex.upipayments.models.TransactionDetails;
 import com.nandroidex.upipayments.utils.UPIPayment;
+import com.siddhi.skynet.Admin.ServiceEntry;
 import com.siddhi.skynet.Class.OrderSheet;
 import com.siddhi.skynet.Model.OrderModel;
 import com.siddhi.skynet.R;
+import com.siddhi.skynet.Spalsh;
+
+import java.util.Date;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CostomActivity extends AppCompatActivity implements PaymentStatusListener {
 
     private TextView ServiceName, ServicePrice;
-    private ImageView profileBack;
+    private ImageView profileBack, serviceImageView;
     FloatingActionButton fab;
     private Boolean profileSet = false;
 
     private FirebaseFirestore db;
-    String productId, productPrice;
+    private FirebaseAuth firebaseAuth;
+    String userNumber, userAddress, userEmailAddress, userName;
+    String serviceName, servicePrice, serviceType, serviceImage;
 
-
-    String OrderId, coustomerNumber, orderDateTime;
-
-    String status="Order";
-
-    String discount="20%", coustomerAddress="Bilaspur, C.G", estimatedTime="within 1day";
+    String estimatedTime="within 1day";
+    String paymentStatus="Cash";
 
     private UPIPayment upiPayment;
+
+    LinearLayout personalinfo, experience;
+    TextView personalinfobtn, experiencebtn;
+    int quantity = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_costom);
 
         init();
+        personalinfo.setVisibility(View.VISIBLE);
+        experience.setVisibility(View.GONE);
+
         Intent intent = getIntent();
-        String a = intent.getStringExtra("a");
-        String b = intent.getStringExtra("b");
-        String c = intent.getStringExtra("c");
+        serviceName = intent.getStringExtra("a");
+        servicePrice = intent.getStringExtra("b");
+        serviceType = intent.getStringExtra("c");
+        serviceImage = intent.getStringExtra("d");
 
 
-        ServiceName.setText(a);
-        ServicePrice.setText(b);
+        SharedPreferences prefs = getSharedPreferences("userData", Context.MODE_PRIVATE);
+        userNumber= prefs.getString("UserNumber", "0");
+        userName= prefs.getString("UserName", "0");
+        userEmailAddress= prefs.getString("UserEmailAddress", "0");
+        userAddress= prefs.getString("UserAddress", "0");
+
+
+        ServiceName.setText(serviceName);
+        ServicePrice.setText("Rs "+servicePrice);
+        if (serviceImage != null) {
+            Glide.with(this).load(serviceImage).into(serviceImageView);
+
+        }else {
+            Glide.with(this).load(R.mipmap.ic_launcher).into(serviceImageView);
+
+        }
 
         fab.setOnClickListener(v->{
-            Cick();
+            if (firebaseAuth.getCurrentUser() != null) {
+                Cick();
+
+            } else {
+                startActivity(new Intent(this, SignIn.class));
+            }
+
         });
 
         profileBack.setOnClickListener(v->{finish();});
 
+        personalinfobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                personalinfo.setVisibility(View.VISIBLE);
+                experience.setVisibility(View.GONE);
+                personalinfobtn.setTextColor(getResources().getColor(R.color.blue));
+                experiencebtn.setTextColor(getResources().getColor(R.color.grey));
+
+
+            }
+        });
+
+        experiencebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                personalinfo.setVisibility(View.GONE);
+                experience.setVisibility(View.VISIBLE);
+                personalinfobtn.setTextColor(getResources().getColor(R.color.grey));
+                experiencebtn.setTextColor(getResources().getColor(R.color.blue));
+
+            }
+        });
+
     }
 
+    public void increaseInteger(View view) {
+        quantity = quantity + 1;
+        display(quantity);
+
+    }public void decreaseInteger(View view) {
+        quantity = quantity - 1;
+        display(quantity);
+    }
+
+    private void display(int number) {
+        TextView displayInteger = (TextView) findViewById(
+                R.id.prnumber);
+        displayInteger.setText("" + number);
+    }
     public void Cick() {
         OrderSheet dialog = new OrderSheet(profileSet);
         dialog.showNow(getSupportFragmentManager(), OrderSheet.class.getSimpleName());
@@ -78,7 +156,7 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
 
                 new SweetAlertDialog(CostomActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                         .setTitleText("Succesfully ordered")
-                        .setContentText("Will connect with you as soon as possible, Your order has been placed you can cancel it from order section.\n-Your order id is-\n" +OrderId)
+                        .setContentText("Will connect with you as soon as possible, Your order has been placed you can cancel it from order section.\n-Your order id is-\n")
                         .show();
                 //orderProduct();
                 saveProduct();
@@ -87,6 +165,7 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
             @Override
             public void onDialogCameraClick() {
                 CostomActivity.this.startUpiPayment();
+
             }
 
             @Override
@@ -102,37 +181,44 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
         fab= findViewById(R.id.fab);
 
         profileBack= findViewById(R.id.profileBack);
+        serviceImageView= findViewById(R.id.serviceImageView);
+
+        personalinfo = findViewById(R.id.personalinfo);
+        experience = findViewById(R.id.experience);
+
+        personalinfobtn = findViewById(R.id.personalinfobtn);
+        experiencebtn = findViewById(R.id.experiencebtn);
+
+
+
+
         db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
     }
     private void saveProduct(){
-
-        String a="0";
-        if (a.equals("0")) {
-
+            String  currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             CollectionReference dbProducts = db.collection("Orders");
 
-            CollectionReference dbProducts1 = db.collection("Orders11");
-            OrderModel profile = new OrderModel(OrderId, productId, coustomerNumber, productPrice, discount, status,
-                    OrderId, coustomerAddress, estimatedTime, orderDateTime);
+            OrderModel orderModel = new OrderModel(serviceName, servicePrice, paymentStatus, serviceType, userNumber, userEmailAddress,
+                    userAddress, estimatedTime, currentDateTimeString, String.valueOf(quantity));
 
-            dbProducts.add(profile)
+            dbProducts.add(orderModel)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(CostomActivity.this, "Product Added", Toast.LENGTH_LONG).show();
 
+                            Snackbar.make(findViewById(R.id.rootLayout), "Service Booked", Snackbar.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(CostomActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Snackbar.make(findViewById(R.id.rootLayout), "Server error! Try again", Snackbar.LENGTH_SHORT).show();
                             Log.d("Errrdsfgdj", "onFailure: "+e);
                         }
                     });
-
-        }
     }
 
 

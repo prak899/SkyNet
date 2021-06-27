@@ -1,0 +1,313 @@
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/circularbordersolid_order"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/servicename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/proximanovaregular"
+            android:text="Service Name"
+            android:textColor="#424242"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/servicePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/proximanovaregular"
+            android:text="Rs 1020"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circular_grey_bordersolid"
+                android:padding="10dp"
+                android:src="@drawable/tickinsidecircle" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/paymentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Payment Status"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circular_grey_bordersolid"
+                android:padding="10dp"
+                android:src="@drawable/ic_time" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/serviceType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="With in 2days"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circular_grey_bordersolid"
+                android:padding="10dp"
+                android:src="@drawable/ic_quantity" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/orderQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/circularbordersolid_order"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Details"
+                android:textSize="19sp"
+                android:fontFamily="@font/proximanovaregular"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/userDownContact"
+                android:background="@drawable/ic_arrow_down"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:textColor="#FFCF66"
+                android:textSize="14sp" />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/userUpContact"
+                android:background="@drawable/ic_arrow_up"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:textColor="#FFCF66"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contactLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="8dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/userNumber"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circular_grey_bordersolid"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_call_24dp" />
+
+                <TextView
+
+                    android:id="@+id/contactNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/proximanovaregular"
+                    android:text="+91 6301784160"
+                    android:textColor="@color/goodgrey"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:paddingRight="8dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circular_grey_bordersolid"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_email_24dp" />
+
+                <TextView
+                    android:id="@+id/contactMail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/goodgrey"
+                    android:text="vkc123@gmail.com"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/proximanovaregular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:paddingRight="8dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circular_grey_bordersolid"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_location_24dp" />
+
+                <TextView
+                    android:id="@+id/contactLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Jilalguda, Telangana INDIA"
+                    android:textSize="15sp"
+                    android:textColor="@color/goodgrey"
+                    android:fontFamily="@font/proximanovaregular" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingRight="8dp">
+            <TextView
+                android:text="Accept"
+                android:id="@+id/accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/proximanovaregular"
+                android:textColor="@color/main_green_color"
+                android:textSize="21sp"
+                android:background="?selectableItemBackground"/>
+            <TextView
+                android:layout_gravity="end"
+                android:text="Reject"
+                android:id="@+id/reject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:fontFamily="@font/proximanovaregular"
+                android:textColor="@color/red_btn_bg_color"
+                android:textSize="21sp"
+                android:background="?selectableItemBackground"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorLightGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formCategoryTextView"/>
+</LinearLayout>

@@ -1,93 +1,80 @@
 package com.siddhi.skynet.Model;
 
 public class OrderModel {
-    private String productPrice;
-    private String productId;
-    private String coustomerNumber;
-    private String discount;
-    private String orderId;
-    private String status;
-    private String statusId;
-    private String coustomerAddress;
+    String serviceName, servicePrice, paymentStatus, serviceType, userNumber, userEmail, userAddress;
+
     private String esimateTime;
     private String orderDate;
+    private String orderQuantity;
 
 
-    public OrderModel(String productPrice, String productId, String coustomerNumber, String discount, String orderId, String status, String statusId, String coustomerAddress, String esimateTime, String orderDate) {
-        this.productPrice = productPrice;
-        this.productId = productId;
-        this.coustomerNumber = coustomerNumber;
-        this.discount = discount;
-        this.orderId = orderId;
-        this.status = status;
-        this.statusId = statusId;
-        this.coustomerAddress = coustomerAddress;
+    public OrderModel(String serviceName, String servicePrice, String paymentStatus, String serviceType, String userNumber, String userEmail, String userAddress, String esimateTime, String orderDate, String orderQuantity) {
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.paymentStatus = paymentStatus;
+        this.serviceType = serviceType;
+        this.userNumber = userNumber;
+        this.userEmail = userEmail;
+        this.userAddress = userAddress;
         this.esimateTime = esimateTime;
         this.orderDate = orderDate;
+        this.orderQuantity = orderQuantity;
     }
 
-    public String getProductPrice() {
-        return productPrice;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setProductPrice(String productPrice) {
-        this.productPrice = productPrice;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getServicePrice() {
+        return servicePrice;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setServicePrice(String servicePrice) {
+        this.servicePrice = servicePrice;
     }
 
-    public String getCoustomerNumber() {
-        return coustomerNumber;
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
 
-    public void setCoustomerNumber(String coustomerNumber) {
-        this.coustomerNumber = coustomerNumber;
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
-    public String getDiscount() {
-        return discount;
+    public String getServiceType() {
+        return serviceType;
     }
 
-    public void setDiscount(String discount) {
-        this.discount = discount;
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getUserNumber() {
+        return userNumber;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setUserNumber(String userNumber) {
+        this.userNumber = userNumber;
     }
 
-    public String getStatus() {
-        return status;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public String getStatusId() {
-        return statusId;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setStatusId(String statusId) {
-        this.statusId = statusId;
-    }
-
-    public String getCoustomerAddress() {
-        return coustomerAddress;
-    }
-
-    public void setCoustomerAddress(String coustomerAddress) {
-        this.coustomerAddress = coustomerAddress;
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     public String getEsimateTime() {
@@ -104,5 +91,13 @@ public class OrderModel {
 
     public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public String getOrderQuantity() {
+        return orderQuantity;
+    }
+
+    public void setOrderQuantity(String orderQuantity) {
+        this.orderQuantity = orderQuantity;
     }
 }

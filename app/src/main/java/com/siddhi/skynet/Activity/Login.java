@@ -1,12 +1,15 @@
 package com.siddhi.skynet.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,8 +27,9 @@ import com.siddhi.skynet.R;
 public class Login extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
-    EditText Email, Password;
+    EditText Email, Password, edt_groupName;
 
+    String str_getTextFrom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +44,11 @@ public class Login extends AppCompatActivity {
         Email= findViewById(R.id.et_email);
         Password= findViewById(R.id.et_password);
     }
+
+
     public void onClickBtn(View v)
     {
-        Query query = databaseReference.child("users").orderByChild("email").equalTo(Email.getText().toString().trim());
+        Query query = databaseReference.child("Admin").orderByChild("userName").equalTo(Email.getText().toString().trim());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

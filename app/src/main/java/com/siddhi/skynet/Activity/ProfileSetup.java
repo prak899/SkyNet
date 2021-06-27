@@ -2,6 +2,7 @@ package com.siddhi.skynet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -80,6 +81,13 @@ public class ProfileSetup extends AppCompatActivity {
 
             profileModel = new ProfileModel(name, number, fullAddress, emailAddress, currentDateTimeString);
 
+            SharedPreferences prefs= getSharedPreferences("userData", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor= prefs.edit();
+            editor.putString("UserName", name);
+            editor.putString("UserNumber", number);
+            editor.putString("UserEmailAddress", emailAddress);
+            editor.putString("UserAddress", fullAddress);
+            editor.apply();
 
             dbContact.child(id).setValue(profileModel);
             Toast.makeText(ProfileSetup.this, "You are all setup", Toast.LENGTH_SHORT).show();

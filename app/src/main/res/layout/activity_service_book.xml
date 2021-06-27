@@ -41,11 +41,19 @@
                         android:fontFamily="@font/sf_pro_display_light"
                         android:text="@string/app_name"
                         android:textColor="#000000"
-                        android:textSize="24sp"
+                        android:textSize="21sp"
                         android:textStyle="bold" />
 
+                    <ImageView
+                        android:visibility="gone"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:id="@+id/cartOption"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_cart_black"
+                        android:layout_alignParentEnd="true"/>
                 </RelativeLayout>
-
             </LinearLayout>
 
 
@@ -61,7 +69,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:paddingBottom="55dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/promoter_recycler" />
@@ -101,7 +108,7 @@
                 android:clickable="true"
                 android:contentDescription="TODO"
                 android:src="@drawable/ic_info_check"
-                android:visibility="visible" />
+                android:visibility="invisible" />
         </RelativeLayout>
     </RelativeLayout>
 

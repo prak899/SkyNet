@@ -1,9 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.ServiceOrder">
+    android:background="@color/grey"
+    android:orientation="vertical"
+    tools:context=".Activity.CostomActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/startLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#293859"
+        android:orientation="horizontal" />
+
+    <!--Top Header Layout-->
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:background="?selectableItemBackgroundBorderless"
+            android:id="@+id/profileBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back_24dp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:visibility="invisible"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:background="?selectableItemBackgroundBorderless"
+                android:id="@+id/profileNotification"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:padding="6dp"
+                android:src="@drawable/ic_cart" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="8dp"
+                android:padding="4dp"
+                android:src="@drawable/circleyellowfil" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/startLayout"
+        android:id="@+id/recycler_view"
+        tools:listitem="@layout/order_list"/>
+
+    <ProgressBar
+        android:visibility="visible"
+        android:id="@+id/dotBounce"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="No contacts added yet!" />
+</RelativeLayout>

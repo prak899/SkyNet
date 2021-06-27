@@ -3,7 +3,9 @@ package com.siddhi.skynet.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.LayoutInflaterCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -81,7 +83,6 @@ public class SignIn extends AppCompatActivity {
         String phoneNo = User_Number.getText().toString();
         Intent intent = new Intent(getApplicationContext(),Otp.class);
         intent.putExtra("phoneNo",phoneNo);
-
         startActivity(intent);
     }
 }

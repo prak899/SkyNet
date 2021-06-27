@@ -51,8 +51,101 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/datalayout"
+        android:layout_below="@id/fd"
+        android:background="@color/bottom_top"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/pendingRel"
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/totalAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="---"
+                android:textSize="20sp"
+                android:background="@drawable/round_tv_pending"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/proximanovaregular"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/totalAdmin"
+                android:id="@+id/tvPending1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service User"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/totalService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="---"
+                android:textSize="20sp"
+                android:background="@drawable/round_tv_assigned"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/proximanovaregular"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/totalService"
+                android:id="@+id/tvAssigned1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service AD"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/totalOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="---"
+                android:textSize="20sp"
+                android:background="@drawable/round_tv_completed"
+                android:textColor="@android:color/white"
+                android:gravity="center" />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/proximanovaregular"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/totalOrder"
+                android:id="@+id/tvCompleted1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
+        </RelativeLayout>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/fd"
+        android:layout_below="@+id/datalayout"
         android:clickable="true"
         android:id="@+id/formRecyclerView"
         android:layout_width="match_parent"

@@ -24,6 +24,7 @@
     <string name="password">Full address</string>
     <string name="e_mail">Email</string>
     <string name="tag">Let\'s join us and \nBuild your relationship with us</string>
+    <string name="tagAdmin">Kindly enter your admin user id and password</string>
     <string name="swipe_right_for_login">Swipe Right for Login</string>
     <string name="register">Setup profile</string>
     <string name="re_type_password">Number</string>
@@ -32,4 +33,6 @@
     <string name="payee">Prakash Majhi</string>
     <string name="transaction_description">For Order</string>
     <string name="amount">1.0</string>
+    <string name="e_userid">User id</string>
+    <string name="e_password">Password</string>
 </resources>
