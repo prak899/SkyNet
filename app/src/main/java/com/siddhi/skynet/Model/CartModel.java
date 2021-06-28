@@ -1,15 +1,17 @@
 package com.siddhi.skynet.Model;
 
-public class OrderModel {
+public class CartModel {
     String serviceName, servicePrice, paymentStatus, serviceType, userNumber, userEmail, userAddress;
 
     private String esimateTime;
     private String orderDate;
     private String orderQuantity;
-    private String orderImage;
+    private String serviceImage;
 
+    public CartModel() {
+    }
 
-    public OrderModel(String serviceName, String servicePrice, String paymentStatus, String serviceType, String userNumber, String userEmail, String userAddress, String esimateTime, String orderDate, String orderQuantity, String orderImage) {
+    public CartModel(String serviceName, String servicePrice, String paymentStatus, String serviceType, String userNumber, String userEmail, String userAddress, String esimateTime, String orderDate, String orderQuantity, String serviceImage) {
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
         this.paymentStatus = paymentStatus;
@@ -20,8 +22,10 @@ public class OrderModel {
         this.esimateTime = esimateTime;
         this.orderDate = orderDate;
         this.orderQuantity = orderQuantity;
-        this.orderImage = orderImage;
+        this.serviceImage = serviceImage;
     }
+
+
 
     public String getServiceName() {
         return serviceName;
@@ -103,11 +107,11 @@ public class OrderModel {
         this.orderQuantity = orderQuantity;
     }
 
-    public String getOrderImage() {
-        return orderImage;
+    public String getServiceImage() {
+        return serviceImage;
     }
 
-    public void setOrderImage(String orderImage) {
-        this.orderImage = orderImage;
+    public void setServiceImage(String serviceImage) {
+        this.serviceImage = serviceImage;
     }
 }

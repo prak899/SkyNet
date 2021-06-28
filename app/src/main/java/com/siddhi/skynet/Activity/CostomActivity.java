@@ -1,5 +1,6 @@
 package com.siddhi.skynet.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +23,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,8 +32,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.nandroidex.upipayments.listener.PaymentStatusListener;
 import com.nandroidex.upipayments.models.TransactionDetails;
 import com.nandroidex.upipayments.utils.UPIPayment;
+import com.siddhi.skynet.Admin.ProfileModel;
 import com.siddhi.skynet.Admin.ServiceEntry;
 import com.siddhi.skynet.Class.OrderSheet;
+import com.siddhi.skynet.Model.CartModel;
 import com.siddhi.skynet.Model.OrderModel;
 import com.siddhi.skynet.R;
 import com.siddhi.skynet.Spalsh;
@@ -43,7 +48,7 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
 
     private TextView ServiceName, ServicePrice;
     private ImageView profileBack, serviceImageView;
-    FloatingActionButton fab;
+
     private Boolean profileSet = false;
 
     private FirebaseFirestore db;
@@ -58,8 +63,8 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
 
     LinearLayout personalinfo, experience;
     TextView personalinfobtn, experiencebtn;
-    int quantity = 0;
-
+    int quantity = 1;
+    DatabaseReference dbCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,16 +98,6 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
             Glide.with(this).load(R.mipmap.ic_launcher).into(serviceImageView);
 
         }
-
-        fab.setOnClickListener(v->{
-            if (firebaseAuth.getCurrentUser() != null) {
-                Cick();
-
-            } else {
-                startActivity(new Intent(this, SignIn.class));
-            }
-
-        });
 
         profileBack.setOnClickListener(v->{finish();});
 
@@ -153,13 +148,7 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
         dialog.setDialogClickListener(new OrderSheet.DialogClickListener() {
             @Override
             public void onDialogGalleryClick() {
-
-                new SweetAlertDialog(CostomActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Succesfully ordered")
-                        .setContentText("Will connect with you as soon as possible, Your order has been placed you can cancel it from order section.\n-Your order id is-\n")
-                        .show();
-                //orderProduct();
-                saveProduct();
+                saveServiceBook();
             }
 
             @Override
@@ -170,7 +159,7 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
 
             @Override
             public void onDialogRemoveClick() {
-                //viewModel.removeProfilePicture(requireActivity().getApplicationContext());
+
             }
         });
     }
@@ -178,7 +167,6 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
     private void init(){
         ServiceName= findViewById(R.id.servicename);
         ServicePrice= findViewById(R.id.servicePrice);
-        fab= findViewById(R.id.fab);
 
         profileBack= findViewById(R.id.profileBack);
         serviceImageView= findViewById(R.id.serviceImageView);
@@ -190,37 +178,81 @@ public class CostomActivity extends AppCompatActivity implements PaymentStatusLi
         experiencebtn = findViewById(R.id.experiencebtn);
 
 
-
-
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
-
+        dbCart = FirebaseDatabase.getInstance().getReference("ServiceCart");
     }
-    private void saveProduct(){
+    public void serviceBook(View view){
+        if (firebaseAuth.getCurrentUser() != null) {
+            Cick();
+
+        } else {
+            startActivity(new Intent(this, SignIn.class));
+        }
+    }
+    public void addToCart(View view){
+        if (firebaseAuth.getCurrentUser() != null) {
+            SharedPreferences prefs= getSharedPreferences("serviceCartPrice", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor= prefs.edit();
+            editor.putString("servicePrice", servicePrice);
+
+            editor.apply();
+            saveToCart();
+
+        } else {
+            startActivity(new Intent(this, SignIn.class));
+        }
+    }
+    private void saveServiceBook(){
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.show();
+        progressDialog.setMessage("Booking");
             String  currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             CollectionReference dbProducts = db.collection("Orders");
 
             OrderModel orderModel = new OrderModel(serviceName, servicePrice, paymentStatus, serviceType, userNumber, userEmailAddress,
-                    userAddress, estimatedTime, currentDateTimeString, String.valueOf(quantity));
+                    userAddress, estimatedTime, currentDateTimeString, String.valueOf(quantity), serviceImage);
 
             dbProducts.add(orderModel)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
 
+                            new SweetAlertDialog(CostomActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Service Booked")
+                                    .setContentText("Will connect with you as soon as possible, Your service has been placed you can cancel it from order section.")
+                                    .show();
                             Snackbar.make(findViewById(R.id.rootLayout), "Service Booked", Snackbar.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Snackbar.make(findViewById(R.id.rootLayout), "Server error! Try again", Snackbar.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                             Log.d("Errrdsfgdj", "onFailure: "+e);
                         }
                     });
     }
 
+
+    private void saveToCart() {
+
+        String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+
+            String id = dbCart.push().getKey();
+            CartModel cartModel = null;
+
+            cartModel = new CartModel(serviceName, servicePrice, paymentStatus, serviceType, userNumber, userEmailAddress,
+                    userAddress, estimatedTime, currentDateTimeString, String.valueOf(quantity), serviceImage);
+
+
+            dbCart.child(userNumber).child(id).setValue(cartModel);
+            Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, CartActivity.class));
+    }
 
     private void startUpiPayment() {
         long millis = System.currentTimeMillis();

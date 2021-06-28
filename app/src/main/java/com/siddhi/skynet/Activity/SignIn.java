@@ -69,15 +69,6 @@ public class SignIn extends AppCompatActivity {
 
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return true;
-    }
 
     public void signup(View v){
         String phoneNo = User_Number.getText().toString();

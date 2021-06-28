@@ -38,6 +38,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
+                    android:onClick="Back"
                     android:id="@+id/backButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,5 +90,20 @@
             android:layout_height="match_parent"
             android:id="@+id/recycler_view"/>
 
+        <ProgressBar
+            android:visibility="visible"
+            android:id="@+id/dotBounce"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="No admin added yet!" />
     </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

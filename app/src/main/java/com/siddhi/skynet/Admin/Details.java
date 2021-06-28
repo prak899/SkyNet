@@ -3,22 +3,35 @@ package com.siddhi.skynet.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.siddhi.skynet.Activity.ServiceBook;
+import com.siddhi.skynet.Adapter.MasterAdapter;
+import com.siddhi.skynet.AdminAdapter.AdminDataAdapter;
+import com.siddhi.skynet.AdminModel.AdminDataModel;
 import com.siddhi.skynet.AdminModel.AdminModel;
 import com.siddhi.skynet.AdminModel.ServiceEntryModel;
+import com.siddhi.skynet.Model.MasterModel;
 import com.siddhi.skynet.R;
 
 import java.util.ArrayList;
@@ -29,6 +42,13 @@ public class Details extends AppCompatActivity {
     List<AdminModel> adminModels;
     DatabaseReference dbAddAdmin;
     String deviceToken;
+    DatabaseReference databaseReference;
+    List<AdminDataModel> adminDataModels = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerView.Adapter adapter;
+
+    TextView EmptyView;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +58,8 @@ public class Details extends AppCompatActivity {
         adminModels = new ArrayList<>();
         dbAddAdmin = FirebaseDatabase.getInstance().getReference("Admin");
 
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
@@ -45,10 +67,13 @@ public class Details extends AppCompatActivity {
                 deviceToken = task.getResult();
             }
         });
+        AdminData();
     }
 
     public void init(){
-
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        progressBar = (ProgressBar) findViewById(R.id.dotBounce);
+        EmptyView = (TextView) findViewById(R.id.empty_view);
     }
 
     public void showAlertDialogButtonClicked(View view)
@@ -83,6 +108,10 @@ public class Details extends AppCompatActivity {
         dialog.show();
     }
 
+    public void Back(View view){
+        this.finish();
+    }
+
     private void addAdmin(String userId, String password) {
 
         if (!userId.isEmpty() || password.isEmpty()) {
@@ -101,5 +130,40 @@ public class Details extends AppCompatActivity {
             Toast.makeText(this, "Server error!", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+
+    public void AdminData(){
+        databaseReference = FirebaseDatabase.getInstance().getReference("Admin");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                adminDataModels.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    AdminDataModel adminDataModel = dataSnapshot.getValue(AdminDataModel.class);
+                    adminDataModels.add(adminDataModel);
+                }
+                adapter = new AdminDataAdapter(adminDataModels, Details.this);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                if (adminDataModels.isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                    EmptyView.setVisibility(View.VISIBLE);
+                }
+                else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    EmptyView.setVisibility(View.GONE);
+                }
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
+                EmptyView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

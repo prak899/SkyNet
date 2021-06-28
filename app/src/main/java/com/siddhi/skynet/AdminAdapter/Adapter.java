@@ -83,7 +83,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
                         intent =  new Intent(context, Details.class);
                         break;
                     case 3:
-                        //intent =  new Intent(context, ServiceEntry.class);
+                        intent =  new Intent(context, ServiceEntry.class);
                         break;
                     default:
                         intent =  new Intent(context, ServiceEntry.class);

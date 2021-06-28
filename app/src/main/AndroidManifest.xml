@@ -13,11 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".Admin.Details"
-            android:theme="@style/MaterialTheme"/>
+        <activity android:name=".Activity.CartActivity"
+            android:theme="@style/MaterialThemeActionBar"
+            android:parentActivityName=".Activity.CostomActivity"
+            android:label="Cart"/>
+        <activity
+            android:name=".Admin.Details"
+            android:theme="@style/MaterialTheme" />
         <activity android:name=".Admin.ServiceOrder" />
         <activity android:name=".Admin.Entry" />
-        <activity android:name=".Activity.CostomActivity" />
+        <activity android:name=".Activity.CostomActivity"
+            android:theme="@style/MaterialTheme"/>
         <activity android:name=".Admin.ServiceEntry" />
         <activity android:name=".Activity.ProfileSetup" />
         <activity android:name=".Activity.ServiceBook" />

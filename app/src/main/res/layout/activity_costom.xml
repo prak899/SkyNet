@@ -258,13 +258,13 @@
 
 
                     <TextView
+                        android:text="1"
                         android:id="@+id/prnumber"
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="5dp"
-                        android:text="0"
                         android:textColor="@android:color/black"
                         android:textStyle="bold" />
 
@@ -363,7 +363,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="About us"
+                                android:text="Service details"
                                 android:fontFamily="@font/proximanovaregular"
                                 android:textSize="17sp"
                                 android:textStyle="bold" />
@@ -373,14 +373,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Edit"
-                                android:fontFamily="@font/proximanovaregular"
-                                android:textColor="#FFCF66"
-                                android:layout_marginEnd="10dp"
-                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <TextView
@@ -471,25 +463,62 @@
         </LinearLayout>
     </ScrollView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
+    <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="3dp">
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/white"
+        tools:ignore="BottomAppBar">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            android:contentDescription="TODO"
-            android:src="@drawable/ic_info_check"
-            android:visibility="visible" />
-    </RelativeLayout>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/circularbordersolid"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:onClick="serviceBook"
+                android:background="?selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:fontFamily="@font/proximanovaregular"
+                android:gravity="center"
+                android:padding="13dp"
+                android:text="Book Service"
+                android:textAllCaps="true"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:ignore="UsingOnClickInXml" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/lightgrey" />
+
+            <TextView
+                android:onClick="addToCart"
+                android:background="?selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:fontFamily="@font/proximanovaregular"
+                android:gravity="center"
+                android:padding="13dp"
+                android:text="Add to cart"
+                android:textAllCaps="true"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
 </RelativeLayout>

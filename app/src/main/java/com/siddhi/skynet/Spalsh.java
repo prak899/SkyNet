@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,14 +22,11 @@ import com.siddhi.skynet.Admin.ServiceEntry;
 
 public class Spalsh extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth;
     boolean bool;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
 
         TextView textView= findViewById(R.id.tv_splash_app_title);
@@ -40,7 +38,6 @@ public class Spalsh extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-        firebaseAuth = FirebaseAuth.getInstance();
 
 
         final Handler handler = new Handler();
@@ -79,26 +76,13 @@ public class Spalsh extends AppCompatActivity {
         bool= prefs.getBoolean("admin", false);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return true;
-    }
-
-
     public void Load(){
-        /*if (firebaseAuth.getCurrentUser() != null) {
-            startActivity(new Intent(Spalsh.this, SignIn.class));
-            Spalsh.this.finish();
-        } else*/ if (bool){
+        if (bool) {
             startActivity(new Intent(Spalsh.this, ServiceEntry.class));
-        } else {
+            Spalsh.this.finish();
+        }else {
             startActivity(new Intent(Spalsh.this, ServiceBook.class));
+            Spalsh.this.finish();
         }
     }
-
 }

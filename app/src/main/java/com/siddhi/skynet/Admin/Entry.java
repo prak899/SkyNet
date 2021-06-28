@@ -74,8 +74,7 @@ public class Entry extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         FabHome.setOnClickListener(v-> {
-            //startActivity(new Intent(this, ServiceEntry.class));
-            uploadImage();
+            startActivity(new Intent(this, ServiceEntry.class));
         });
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -165,15 +164,19 @@ public class Entry extends AppCompatActivity {
                 && resultCode == RESULT_OK
                 && data != null
                 && data.getData() != null) {
-            // Get the Uri of data
+
             filePath = data.getData();
             try {
-                // Setting image on image view using Bitmap
                 Bitmap bitmap = MediaStore
                         .Images
                         .Media
                         .getBitmap(getContentResolver(), filePath);
                 //imageView.setImageBitmap(bitmap);
+                Bitmap emptyBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+                if (!bitmap.sameAs(emptyBitmap))
+                    uploadImage();
+                else
+                    Toast.makeText(this, "Upload a image first", Toast.LENGTH_SHORT).show();
             }
 
             catch (IOException e) {
@@ -186,9 +189,8 @@ public class Entry extends AppCompatActivity {
     private void uploadImage()
     {
         if (filePath != null) {
-            ProgressDialog progressDialog
-                    = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
+            ProgressDialog progressDialog = new ProgressDialog(this);
+
             progressDialog.show();
             StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
 
@@ -225,7 +227,7 @@ public class Entry extends AppCompatActivity {
                                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot)
                                 {
                                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage("Uploaded " + (int)progress + "%");
+                                    progressDialog.setMessage("Uploading " + (int)progress + "%");
                                 }
                             });
                     }
